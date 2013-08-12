@@ -22,7 +22,6 @@ public class Action implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private Set<NodeAction> gwNodeActions = new HashSet<NodeAction>(0);
 
 	public Action() {
 	}
@@ -31,10 +30,6 @@ public class Action implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Action(String name, Set<NodeAction> gwNodeActions) {
-		this.name = name;
-		this.gwNodeActions = gwNodeActions;
-	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -54,15 +49,6 @@ public class Action implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwAction")
-	public Set<NodeAction> getGwNodeActions() {
-		return this.gwNodeActions;
-	}
-
-	public void setGwNodeActions(Set<NodeAction> gwNodeActions) {
-		this.gwNodeActions = gwNodeActions;
 	}
 
 }
