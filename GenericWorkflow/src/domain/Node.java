@@ -22,6 +22,10 @@ import javax.persistence.Table;
 @Table(name = "gw_node", catalog = "genericworkflow")
 public class Node implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -289636178603899703L;
 	private Integer id;
 	private Workflow gwWorkflow;
 	private Node gwNodeByPreviousNode;
