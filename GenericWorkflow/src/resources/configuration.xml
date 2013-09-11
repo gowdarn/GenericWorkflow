@@ -17,7 +17,6 @@
 	<context:annotation-config />
 	<context:component-scan base-package="*" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	<aop:aspectj-autoproxy />
 
 	<bean id="contextApplicationContextProvider" 
 	 class="context.ApplicationContextProvider"/> 
@@ -79,7 +78,7 @@
 
 	<bean id="hibernate3Replicator" class="net.sf.beanlib.hibernate3.Hibernate3BeanReplicator" />
 		
-<!-- 	<bean id="genericEntityDao" class="com.codefish.dao.impl.GenericEntityDaoImpl"> -->
-<!-- 		<property name="sessionFactory" ref="sessionFactory"></property> -->
-<!-- 	</bean> -->
+	<bean id="genericDao" class="dao.GenericDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>
