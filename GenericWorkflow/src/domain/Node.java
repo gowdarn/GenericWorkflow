@@ -2,13 +2,15 @@ package domain;
 
 // Generated Aug 12, 2013 2:56:13 PM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,36 +28,16 @@ public class Node implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -289636178603899703L;
+	
 	private Integer id;
-	private Workflow gwWorkflow;
-	private Node gwNodeByPreviousNode;
-	private Node gwNodeByNextNode;
+	private Workflow workflow;
+	private Node previousNode;
+	private Node nextNode;
 	private String name;
 	private String className;
-	private Set<NodeAction> gwNodeActions = new HashSet<NodeAction>(0);
-	private Set<Node> gwNodesForNextNode = new HashSet<Node>(0);
-	private Set<Node> gwNodesForPreviousNode = new HashSet<Node>(0);
+	private Set<NodeAction> actions = new HashSet<NodeAction>(0);
 
 	public Node() {
-	}
-
-	public Node(Workflow gwWorkflow, String name) {
-		this.gwWorkflow = gwWorkflow;
-		this.name = name;
-	}
-
-	public Node(Workflow gwWorkflow, Node gwNodeByPreviousNode,
-			Node gwNodeByNextNode, String name, String className,
-			Set<NodeAction> gwNodeActions, Set<Node> gwNodesForNextNode,
-			Set<Node> gwNodesForPreviousNode) {
-		this.gwWorkflow = gwWorkflow;
-		this.gwNodeByPreviousNode = gwNodeByPreviousNode;
-		this.gwNodeByNextNode = gwNodeByNextNode;
-		this.name = name;
-		this.className = className;
-		this.gwNodeActions = gwNodeActions;
-		this.gwNodesForNextNode = gwNodesForNextNode;
-		this.gwNodesForPreviousNode = gwNodesForPreviousNode;
 	}
 
 	@Id
@@ -71,32 +53,32 @@ public class Node implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "workflow", nullable = false)
-	public Workflow getGwWorkflow() {
-		return this.gwWorkflow;
+	public Workflow getWorkflow() {
+		return this.workflow;
 	}
 
-	public void setGwWorkflow(Workflow gwWorkflow) {
-		this.gwWorkflow = gwWorkflow;
+	public void setWorkflow(Workflow workflow) {
+		this.workflow = workflow;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "previous_node")
-	public Node getGwNodeByPreviousNode() {
-		return this.gwNodeByPreviousNode;
+	public Node getPreviousNode() {
+		return this.previousNode;
 	}
 
-	public void setGwNodeByPreviousNode(Node gwNodeByPreviousNode) {
-		this.gwNodeByPreviousNode = gwNodeByPreviousNode;
+	public void setPreviousNode(Node previousNode) {
+		this.previousNode = previousNode;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "next_node")
-	public Node getGwNodeByNextNode() {
-		return this.gwNodeByNextNode;
+	public Node getNextNode() {
+		return this.nextNode;
 	}
 
-	public void setGwNodeByNextNode(Node gwNodeByNextNode) {
-		this.gwNodeByNextNode = gwNodeByNextNode;
+	public void setNextNode(Node nextNode) {
+		this.nextNode = nextNode;
 	}
 
 	@Column(name = "name", nullable = false, length = 45)
@@ -118,30 +100,11 @@ public class Node implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwNode")
-	public Set<NodeAction> getGwNodeActions() {
-		return this.gwNodeActions;
+	public Set<NodeAction> getActions() {
+		return this.actions;
 	}
 
-	public void setGwNodeActions(Set<NodeAction> gwNodeActions) {
-		this.gwNodeActions = gwNodeActions;
+	public void setActions(Set<NodeAction> actions) {
+		this.actions = actions;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwNodeByNextNode")
-	public Set<Node> getGwNodesForNextNode() {
-		return this.gwNodesForNextNode;
-	}
-
-	public void setGwNodesForNextNode(Set<Node> gwNodesForNextNode) {
-		this.gwNodesForNextNode = gwNodesForNextNode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwNodeByPreviousNode")
-	public Set<Node> getGwNodesForPreviousNode() {
-		return this.gwNodesForPreviousNode;
-	}
-
-	public void setGwNodesForPreviousNode(Set<Node> gwNodesForPreviousNode) {
-		this.gwNodesForPreviousNode = gwNodesForPreviousNode;
-	}
-
 }

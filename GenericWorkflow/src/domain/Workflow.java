@@ -2,14 +2,16 @@ package domain;
 
 // Generated Aug 12, 2013 2:56:13 PM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,22 +31,13 @@ public class Workflow implements java.io.Serializable {
 	private String description;
 	private Date creationDate;
 	private String createdBy;
-	private Set<Node> gwNodes = new HashSet<Node>(0);
+	private Set<Node> nodes = new HashSet<Node>(0);
 
 	public Workflow() {
 	}
 
 	public Workflow(String name) {
 		this.name = name;
-	}
-
-	public Workflow(String name, String description, Date creationDate,
-			String createdBy, Set<Node> gwNodes) {
-		this.name = name;
-		this.description = description;
-		this.creationDate = creationDate;
-		this.createdBy = createdBy;
-		this.gwNodes = gwNodes;
 	}
 
 	@Id
@@ -96,12 +89,11 @@ public class Workflow implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwWorkflow")
-	public Set<Node> getGwNodes() {
-		return this.gwNodes;
+	public Set<Node> getNodes() {
+		return this.nodes;
 	}
 
-	public void setGwNodes(Set<Node> gwNodes) {
-		this.gwNodes = gwNodes;
+	public void setNodes(Set<Node> nodes) {
+		this.nodes = nodes;
 	}
-
 }

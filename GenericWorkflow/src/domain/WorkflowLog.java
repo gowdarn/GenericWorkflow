@@ -2,12 +2,14 @@ package domain;
 
 // Generated Aug 12, 2013 2:56:13 PM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,7 +25,7 @@ import javax.persistence.TemporalType;
 public class WorkflowLog implements java.io.Serializable {
 
 	private Integer id;
-	private NodeAction gwNodeAction;
+	private NodeAction nodeAction;
 	private String user;
 	private String comments;
 	private Date date;
@@ -32,15 +34,7 @@ public class WorkflowLog implements java.io.Serializable {
 	}
 
 	public WorkflowLog(NodeAction gwNodeAction) {
-		this.gwNodeAction = gwNodeAction;
-	}
-
-	public WorkflowLog(NodeAction gwNodeAction, String user,
-			String comments, Date date) {
-		this.gwNodeAction = gwNodeAction;
-		this.user = user;
-		this.comments = comments;
-		this.date = date;
+		this.nodeAction = gwNodeAction;
 	}
 
 	@Id
@@ -56,12 +50,12 @@ public class WorkflowLog implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "node_action", nullable = false)
-	public NodeAction getGwNodeAction() {
-		return this.gwNodeAction;
+	public NodeAction getNodeAction() {
+		return this.nodeAction;
 	}
 
-	public void setGwNodeAction(NodeAction gwNodeAction) {
-		this.gwNodeAction = gwNodeAction;
+	public void setNodeAction(NodeAction nodeAction) {
+		this.nodeAction = nodeAction;
 	}
 
 	@Column(name = "user", length = 45)

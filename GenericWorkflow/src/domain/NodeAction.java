@@ -2,17 +2,15 @@ package domain;
 
 // Generated Aug 12, 2013 2:56:13 PM by Hibernate Tools 3.4.0.CR1
 
-import java.util.HashSet;
-import java.util.Set;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -23,27 +21,12 @@ import javax.persistence.Table;
 public class NodeAction implements java.io.Serializable {
 
 	private Integer id;
-	private Node gwNode;
-	private Action gwAction;
+	private Node node;
+	private Action action;
 	private String fctName;
 	private Boolean direction;
-	private Set<WorkflowLog> gwWorkflowLogs = new HashSet<WorkflowLog>(0);
 
 	public NodeAction() {
-	}
-
-	public NodeAction(Node gwNode, Action gwAction) {
-		this.gwNode = gwNode;
-		this.gwAction = gwAction;
-	}
-
-	public NodeAction(Node gwNode, Action gwAction, String fctName,
-			Boolean direction, Set<WorkflowLog> gwWorkflowLogs) {
-		this.gwNode = gwNode;
-		this.gwAction = gwAction;
-		this.fctName = fctName;
-		this.direction = direction;
-		this.gwWorkflowLogs = gwWorkflowLogs;
 	}
 
 	@Id
@@ -59,22 +42,22 @@ public class NodeAction implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "node", nullable = false)
-	public Node getGwNode() {
-		return this.gwNode;
+	public Node getNode() {
+		return this.node;
 	}
 
-	public void setGwNode(Node gwNode) {
-		this.gwNode = gwNode;
+	public void setNode(Node node) {
+		this.node = node;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "action", nullable = false)
-	public Action getGwAction() {
-		return this.gwAction;
+	public Action getAction() {
+		return this.action;
 	}
 
-	public void setGwAction(Action gwAction) {
-		this.gwAction = gwAction;
+	public void setAction(Action action) {
+		this.action = action;
 	}
 
 	@Column(name = "fct_name", length = 45)
@@ -94,14 +77,4 @@ public class NodeAction implements java.io.Serializable {
 	public void setDirection(Boolean direction) {
 		this.direction = direction;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwNodeAction")
-	public Set<WorkflowLog> getGwWorkflowLogs() {
-		return this.gwWorkflowLogs;
-	}
-
-	public void setGwWorkflowLogs(Set<WorkflowLog> gwWorkflowLogs) {
-		this.gwWorkflowLogs = gwWorkflowLogs;
-	}
-
 }
