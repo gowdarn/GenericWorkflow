@@ -18,8 +18,7 @@
 	<context:component-scan base-package="*" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="contextApplicationContextProvider" 
-	 class="context.ApplicationContextProvider"/> 
+	<bean id="contextApplicationContextProvider" class="context.ApplicationContextProvider" /> 
 	
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -79,6 +78,9 @@
 	<bean id="hibernate3Replicator" class="net.sf.beanlib.hibernate3.Hibernate3BeanReplicator" />
 		
 	<bean id="genericDao" class="dao.GenericDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="workflowDao" class="dao.WorkflowDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>
