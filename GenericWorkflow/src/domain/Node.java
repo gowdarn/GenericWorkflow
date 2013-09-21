@@ -99,7 +99,7 @@ public class Node implements java.io.Serializable {
 		this.className = className;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwNode")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "node")
 	public Set<NodeAction> getActions() {
 		return this.actions;
 	}

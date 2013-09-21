@@ -88,7 +88,7 @@ public class Workflow implements java.io.Serializable {
 		this.createdBy = createdBy;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwWorkflow")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workflow")
 	public Set<Node> getNodes() {
 		return this.nodes;
 	}

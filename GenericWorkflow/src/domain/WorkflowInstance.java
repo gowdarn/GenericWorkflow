@@ -77,7 +77,7 @@ public class WorkflowInstance implements java.io.Serializable {
 		this.creationDate = creationDate;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gwWorkflowInstance")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workflowInstance")
 	public Set<WorkflowState> getWorkflowStates() {
 		return this.workflowStates;
 	}
