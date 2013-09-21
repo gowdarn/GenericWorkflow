@@ -78,7 +78,7 @@
 
 	<bean id="hibernate3Replicator" class="net.sf.beanlib.hibernate3.Hibernate3BeanReplicator" />
 		
-	<bean id="genericDao" class="dao.GenericDaoImpl">
+	<bean id="genericDao" class="dao.GenericDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>
