@@ -1,8 +1,9 @@
 package dao;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public interface IWorkflowDao {
+public interface IWorkflowDao extends IGenericDao {
 
 	List<String> getWorkflowFirstNodeActions(String workflowName);
 
@@ -11,5 +12,11 @@ public interface IWorkflowDao {
 
 	List<String> getWorkflowCurrentNodeActions(String workflowName,
 			Integer workflowInstanceId);
+
+	Integer changeState(String workflowName, Integer workflowInstanceId,
+			String actionName, byte[] data, String user, String comments)
+			throws SecurityException, NoSuchMethodException,
+			ClassNotFoundException, IllegalArgumentException,
+			IllegalAccessException, InvocationTargetException, InstantiationException;
 
 }

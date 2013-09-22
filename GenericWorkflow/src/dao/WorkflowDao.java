@@ -1,5 +1,7 @@
 package dao;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +37,8 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 		return actions;
 	}
 	
-	public Integer changeState(String workflowName, Integer workflowInstanceId, String actionName, byte[] data, String user, String comments){
+	@Override
+	public Integer changeState(String workflowName, Integer workflowInstanceId, String actionName, byte[] data, String user, String comments) throws SecurityException, NoSuchMethodException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		if(workflowInstanceId == 0){
 			return startNewWorkflow(workflowName, actionName, data, user, comments);
 		}else{
@@ -51,6 +54,13 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 					.add(Restrictions.eq("node.id", currentNode.getId()))
 					.add(Restrictions.eq("action.name", actionName))
 					.uniqueResult();
+			
+			//call user defined function for the action taken
+			
+			Class<?> c = Class.forName(currentNode.getClassName());
+			Object clazz = c.newInstance();
+			Method method = c.getDeclaredMethod(nodeAction.getFctName());
+			method.invoke(clazz);
 			
 			//create next or previous workflow state
 			WorkflowState workflowState = new WorkflowState();
@@ -141,7 +151,7 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 		Node node = (Node) criteria(Node.class)
 				.createAlias("workflow", "workflow")
 				.add(Restrictions.eq("workflow.name", workflowName))
-				.add(Restrictions.eq("node.previousNode", null))
+				.add(Restrictions.isNull("previousNode"))
 				.uniqueResult();
 		
 		return node;

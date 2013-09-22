@@ -26,7 +26,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "gw_workflow", catalog = "genericworkflow", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Workflow implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private String name;
 	private String description;
 	private Date creationDate;
@@ -43,11 +43,11 @@ public class Workflow implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
