@@ -24,4 +24,10 @@ public class WorkflowController {
 		model.addAttribute("workflows",workflows);
 		return "listworkflows";
 	}
+	
+	@RequestMapping(value = "/newworkflow", method = RequestMethod.GET)
+	public String newworkflow(Model model) {
+
+		return "newworkflow";
+	}
 }
