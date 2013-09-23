@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import context.AppContext;
 import dao.IWorkflowDao;
+import domain.Action;
 import domain.Node;
 import domain.Workflow;
 
@@ -21,6 +22,7 @@ public class WorkflowBean implements Serializable{
 	private IWorkflowDao workflowDao;
 	private Workflow workflow = new Workflow();
 	private Node node= new Node();
+	private Action action= new Action();
 	
 	public WorkflowBean() {
 		
@@ -41,6 +43,13 @@ public class WorkflowBean implements Serializable{
 	public Node getNode() {
 		return node;
 	}
+	public void setAction(Action action) {
+		this.action = action;
+	}
+	
+	public Action getAction() {
+		return action;
+	}
 
 	
 	
@@ -52,6 +61,10 @@ public class WorkflowBean implements Serializable{
 	public void savenode(){
 		workflowDao = (IWorkflowDao) AppContext.getBean("workflowDao");
 		workflowDao.saveOrUpdate(node);
+	}
+	public void saveaction(){
+		workflowDao = (IWorkflowDao) AppContext.getBean("workflowDao");
+		workflowDao.saveOrUpdate(action);
 	}
 	public void startWorkflow(String workflowName) throws SecurityException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		workflowDao = (IWorkflowDao) AppContext.getBean("workflowDao");

@@ -36,4 +36,9 @@ public class WorkflowController {
 
 		return "newnode";
 	}
+	@RequestMapping(value = "/newaction", method = RequestMethod.GET)
+	public String newaction(Model model) {
+
+		return "newaction";
+	}
 }
