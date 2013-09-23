@@ -30,4 +30,10 @@ public class WorkflowController {
 
 		return "newworkflow";
 	}
+	
+	@RequestMapping(value = "/newnode", method = RequestMethod.GET)
+	public String newnode(Model model) {
+
+		return "newnode";
+	}
 }
