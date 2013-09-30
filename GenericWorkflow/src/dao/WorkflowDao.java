@@ -30,8 +30,10 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 				.uniqueResult();
 		
 		List<String> actions = new ArrayList<String>();
-		for (NodeAction action : workflowInstance.getCurrentState().getNode().getActions()){
-			actions.add(action.getAction().getName());
+		if(workflowInstance.getCurrentState().getNode()!=null){
+			for (NodeAction action : workflowInstance.getCurrentState().getNode().getActions()){
+				actions.add(action.getAction().getName());
+			}
 		}
 		
 		return actions;
@@ -93,7 +95,7 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 				.createAlias("node", "node")
 				.createAlias("node.workflow", "workflow")
 				.add(Restrictions.eq("workflow.name", workflowName))
-				.add(Restrictions.eq("node.previousNode", null))
+				.add(Restrictions.isNull("node.previousNode"))
 				.list();
 		
 		List<String> actions = new ArrayList<String>();
@@ -105,7 +107,7 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 	}
 	
 	@Override
-	public Integer startNewWorkflow(String workflowName, String actionName, byte[] data, String user, String comments){
+	public Integer startNewWorkflow(String workflowName, String actionName, byte[] data, String user, String comments) throws SecurityException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		Workflow workflow = (Workflow) criteria(Workflow.class)
 				.add(Restrictions.eq("name", workflowName)).uniqueResult();
 		
@@ -134,7 +136,9 @@ public class WorkflowDao extends GenericDao implements IWorkflowDao {
 			//assign current state to workflow instance
 			workflowInstance.setCurrentState(workflowState);
 			saveOrUpdate(workflowInstance);
-			return workflowInstance.getId();
+			
+			
+			return changeState(workflowName, workflowInstance.getId(), actionName, data, user, comments);
 		}
 		
 		return null;
