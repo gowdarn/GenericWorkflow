@@ -7,16 +7,12 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-<h:head>
-</h:head>
-
-<h:body>
-<h:form>
-
-    <ui:repeat var="workflow" value="#{workflows}" varStatus="status">
-        <h:outputLabel>#{workflow.name}</h:outputLabel><a href="/GenericWorkflow/showworkflow/#{workflow.name}">Start</a><br />
-   </ui:repeat>
-
-</h:form>
-</h:body>
+<h:head></h:head>
+	<h:body>
+			<h:form id="actions">
+		<c:forEach items="#{actions}" var="action" varStatus="table">
+				<a href="/GenericWorkflow/takeaction/${workflowname}/${instanceId}/#{action}"> #{action} </a>
+		</c:forEach>
+			</h:form>
+	</h:body>
 </html>

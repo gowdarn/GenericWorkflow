@@ -11,12 +11,6 @@
 </h:head>
 
 <h:body>
-<h:form>
-
-    <ui:repeat var="workflow" value="#{workflows}" varStatus="status">
-        <h:outputLabel>#{workflow.name}</h:outputLabel><a href="/GenericWorkflow/showworkflow/#{workflow.name}">Start</a><br />
-   </ui:repeat>
-
-</h:form>
+The workflow instance (${instanceId}) is pending at : ${status}
 </h:body>
 </html>
