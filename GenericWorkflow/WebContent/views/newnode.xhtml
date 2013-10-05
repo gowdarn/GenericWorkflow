@@ -11,20 +11,19 @@
 </h:head>
 
 <h:body>
-<h:form>
-
-   <h:panelGrid columns="2">
-
-        <h:outputLabel for="name">Name:</h:outputLabel>
-        <h:inputText id="name" value="#{workflowBean.node.name}"/>
-        <h:outputLabel for="className">Description:</h:outputLabel>
-        <h:inputText id="className" value="#{workflowBean.node.className}"/>
-        
-       
-    </h:panelGrid>
-    
-    <h:commandButton value="Save Node" action="#{workflowBean.savenode}" />
-
-</h:form>
+	<h:form>
+	   <h:panelGrid columns="2">
+	        <h:outputLabel for="name">Name:</h:outputLabel>
+	        <h:inputText id="name" value="#{workflowBean.node.name}"/>
+	        <h:outputLabel for="className">Description:</h:outputLabel>
+	        <h:inputText id="className" value="#{workflowBean.node.className}"/>
+	        <h:outputLabel for="className">Workflow:</h:outputLabel>
+	        <h:selectOneMenu>
+	   			<f:selectItems value="#{constantsBean.workflows}" var="c" itemLabel="#{c.name}" itemValue="#{c.id}" />
+	   		</h:selectOneMenu>
+	    </h:panelGrid>
+	    
+	    <h:commandButton value="Save Node" action="#{workflowBean.savenode}" />
+	</h:form>
 </h:body>
 </html>

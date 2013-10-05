@@ -35,6 +35,12 @@ public class WorkflowController {
 		return "newworkflow";
 	}
 	
+	@RequestMapping(value = "/newnode", method = RequestMethod.GET)
+	public String newnode(Model model) {
+		
+		return "newnode";
+	}
+	
 	@RequestMapping(value = "/showworkflow/{workflowname}", method = RequestMethod.GET)
 	public String startWorkflow(@PathVariable String workflowname,Model model) {
 		List<String> actions = workflowDao.getWorkflowFirstNodeActions(workflowname);
