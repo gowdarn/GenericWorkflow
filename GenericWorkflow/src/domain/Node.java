@@ -39,6 +39,10 @@ public class Node implements java.io.Serializable {
 
 	public Node() {
 	}
+	
+	public Node(int id) {
+		this.id = id;
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

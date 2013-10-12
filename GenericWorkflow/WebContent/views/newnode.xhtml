@@ -15,11 +15,21 @@
 	   <h:panelGrid columns="2">
 	        <h:outputLabel for="name">Name:</h:outputLabel>
 	        <h:inputText id="name" value="#{workflowBean.node.name}"/>
-	        <h:outputLabel for="className">Description:</h:outputLabel>
+	        <h:outputLabel for="className">Java Class Name:</h:outputLabel>
 	        <h:inputText id="className" value="#{workflowBean.node.className}"/>
-	        <h:outputLabel for="className">Workflow:</h:outputLabel>
-	        <h:selectOneMenu>
+	        <h:outputLabel>Workflow:</h:outputLabel>
+	        <h:selectOneMenu value="#{workflowBean.workflowId}">
 	   			<f:selectItems value="#{constantsBean.workflows}" var="c" itemLabel="#{c.name}" itemValue="#{c.id}" />
+	   		</h:selectOneMenu>
+	   		<h:outputLabel>Previous Node:</h:outputLabel>
+	        <h:selectOneMenu value="#{workflowBean.previousNodeId}">
+	        	<f:selectItem itemValue="0" itemLabel="None" />
+	   			<f:selectItems value="#{constantsBean.nodes}" var="c" itemLabel="#{c.name}" itemValue="#{c.id}" />
+	   		</h:selectOneMenu>
+	   		<h:outputLabel>Next Node:</h:outputLabel>
+	        <h:selectOneMenu value="#{workflowBean.nextNodeId}">
+	       		<f:selectItem itemValue="0" itemLabel="None" />
+	   			<f:selectItems value="#{constantsBean.nodes}" var="c" itemLabel="#{c.name}" itemValue="#{c.id}" />
 	   		</h:selectOneMenu>
 	    </h:panelGrid>
 	    

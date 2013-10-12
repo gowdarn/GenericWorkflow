@@ -6,12 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import dao.DAO;
 import dao.IWorkflowDao;
+import domain.Node;
 import domain.Workflow;
 import domain.WorkflowInstance;
 
@@ -48,6 +52,30 @@ public class WorkflowController {
 		model.addAttribute("instanceId",0);
 		model.addAttribute("workflowname",workflowname);
 		return "showworkflow";
+	}
+	
+	@RequestMapping(value = "/editworkflow/{workflowid}", method = RequestMethod.GET)
+	public ModelAndView editWorkflow(@PathVariable Integer workflowid,Model model) {
+		Workflow workflow = (Workflow) workflowDao.findByID(Workflow.class, workflowid);
+		return new ModelAndView("editworkflow", "command", workflow);
+	}
+	
+	@RequestMapping(value = "/saveworkflow", method = RequestMethod.POST)
+	public String saveWorkflow(@ModelAttribute("SpringWeb") Workflow workflow, ModelMap model) {
+		workflowDao.saveOrUpdate(workflow);
+		return "result";
+	}
+	
+	@RequestMapping(value = "/editnode/{nodeid}", method = RequestMethod.GET)
+	public ModelAndView editNode(@PathVariable Integer nodeid,Model model) {
+		Node node = (Node) workflowDao.findByID(Node.class, nodeid);
+		return new ModelAndView("editnode", "command", node);
+	}
+	
+	@RequestMapping(value = "/savenode", method = RequestMethod.POST)
+	public String saveNode(@ModelAttribute("SpringWeb") Node node, ModelMap model) {
+		workflowDao.saveOrUpdate(node);
+		return "result";
 	}
 	
 	@RequestMapping(value = "/showactions/{instanceid}", method = RequestMethod.GET)

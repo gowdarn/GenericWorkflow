@@ -12,11 +12,25 @@
 
 <h:body>
 <h:form>
-
-    <ui:repeat var="workflow" value="#{workflows}" varStatus="status">
-        <h:outputLabel>#{workflow.name}</h:outputLabel><a href="/GenericWorkflow/showworkflow/#{workflow.name}">Start</a><br />
-   </ui:repeat>
-
+	<a href="/GenericWorkflow/showworkflow/#{workflow.name}">Add New Workflow</a>
+	<table>
+	    <ui:repeat var="workflow" value="#{workflows}" varStatus="status">
+	    <tr>
+	    	<td>
+	        	<h:outputLabel>#{workflow.name}</h:outputLabel>
+	        </td>
+	    	<td>
+	        	<a href="/GenericWorkflow/showworkflow/#{workflow.name}">Start</a>
+	        </td>
+	    	<td>
+	        	<a href="/GenericWorkflow/editworkflow/#{workflow.id}">Edit</a>
+	        </td>
+	    	<td>
+	        	<a href="/GenericWorkflow/showworkflow/#{workflow.name}">Delete</a>
+	        </td>
+	    </tr>
+	   </ui:repeat>
+	</table>
 </h:form>
 </h:body>
 </html>

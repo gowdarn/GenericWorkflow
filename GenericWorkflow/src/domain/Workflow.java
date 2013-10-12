@@ -39,6 +39,10 @@ public class Workflow implements java.io.Serializable {
 	public Workflow(String name) {
 		this.name = name;
 	}
+	
+	public Workflow(int id) {
+		this.id = id;
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
